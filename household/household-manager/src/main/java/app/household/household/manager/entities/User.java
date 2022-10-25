@@ -2,10 +2,7 @@
 package app.household.household.manager.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 import javax.persistence.*;
@@ -17,6 +14,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "users")
+@Builder
 public class User implements java.io.Serializable {
 
     @Id
