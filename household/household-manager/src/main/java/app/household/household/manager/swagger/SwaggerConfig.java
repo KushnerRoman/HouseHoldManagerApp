@@ -2,7 +2,12 @@ package app.household.household.manager.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -12,10 +17,14 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableSwagger2
 @EnableWebMvc
+@EnableWebSecurity
 public class SwaggerConfig implements WebMvcConfigurer {
+
 
     @Bean
     public Docket couponApi() {
@@ -38,14 +47,9 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .addResourceLocations("file:./src/", "/resources/");
     }
 
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring()
-                .antMatchers("/api/auth/**")
-                .antMatchers("/v3/api-docs/**")
-                .antMatchers("configuration/**")
-                .antMatchers("/swagger*/**")
-                .antMatchers("/webjars/**")
-                .antMatchers("/swagger-ui/**");
-    }
+
+
+
+
+
 }

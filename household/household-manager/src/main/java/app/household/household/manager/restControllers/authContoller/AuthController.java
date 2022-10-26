@@ -34,7 +34,9 @@ public class AuthController {
                                                               @ApiParam(required = true)   @RequestParam String password,
                                                               @ApiParam(required = true)  @RequestParam String email)
             throws EmailAlreadyExistException, EmailNotValidException {
+
         try {
+            System.out.println("test");
             return new ResponseEntity<RegistrationResponse>(authControllerService.createNewUser(firstName, lastName, password, email), HttpStatus.CREATED);
         } catch (EmailAlreadyExistException  e) {
             return new ResponseEntity<RegistrationResponse>(new RegistrationResponse(e.getMessage(), false, null), HttpStatus.valueOf(400));

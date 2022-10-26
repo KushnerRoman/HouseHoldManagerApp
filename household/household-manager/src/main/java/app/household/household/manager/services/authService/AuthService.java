@@ -32,6 +32,7 @@ public class AuthService {
     public RegistrationResponse createNewUser(String firstName,String lastName, String password, String email) throws EmailAlreadyExistException, EmailNotValidException, UserNameException {
 
 
+
         if (!emailValidator.test(email)) {
             throw new EmailNotValidException();
         }
