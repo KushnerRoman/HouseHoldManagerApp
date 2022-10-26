@@ -8,10 +8,11 @@ import java.util.regex.Pattern;
 @Component
 public class UserValidator {
 
-    private final String name_pattern = "^[A-Z][a-z]$";
+    private final String name_pattern = "[A-Za-z'èé\\s\\-]*";
 
 
     public boolean test(String name) {
+        System.out.println(name);
         return Pattern.compile(name_pattern).matcher(name).matches();
     }
 

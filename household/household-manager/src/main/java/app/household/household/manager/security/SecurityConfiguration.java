@@ -3,6 +3,7 @@ package app.household.household.manager.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -21,7 +22,7 @@ import java.util.Arrays;
 
 @Configuration
 
-@EnableWebSecurity
+
 
 public class SecurityConfiguration  {
 
@@ -29,7 +30,9 @@ public class SecurityConfiguration  {
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
 
-        http.authorizeHttpRequests((auth) -> auth.antMatchers("/api/auth/**").permitAll());
+        http.authorizeHttpRequests((auth) -> auth.antMatchers("/swagger-ui/**").permitAll()
+                .anyRequest().permitAll());
+        http.cors().and().csrf().disable();
 
 
 
@@ -45,7 +48,7 @@ public class SecurityConfiguration  {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().
-                antMatchers("/v2/api-docs/**",
+                antMatchers("/v3/api-docs/**",
                         "/swagger-ui/**",
                         "/configuration/ui",
                         "/swagger-resources",

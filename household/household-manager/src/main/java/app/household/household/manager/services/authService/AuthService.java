@@ -36,7 +36,9 @@ public class AuthService {
         if (!emailValidator.test(email)) {
             throw new EmailNotValidException();
         }
-        if(!userValidator.test(firstName)&& !userValidator.test(lastName)) {
+        if(!userValidator.test(firstName) || !userValidator.test(lastName)) {
+            System.out.println("test first name"+userValidator.test(firstName) );
+            System.out.println("test last name"+userValidator.test(lastName));
             throw new UserNameException();
         }
         if (authRepository.existsByEmail(email)) {
